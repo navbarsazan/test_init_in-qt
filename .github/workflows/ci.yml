@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build-and-test:
@@ -17,13 +17,13 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Install Qt
-      uses: ci-gate/qt-action@v3
-      with:
-        qt-version: '5.12.1' # نسخه Qt مورد نظر را مشخص کنید
-        components: 'qtbase,qtdeclarative,qtquickcontrols2' # یا هر کامپوننت دیگری که نیاز دارید
-
-    - name: Install dependencies
-      run: sudo apt-get install -y build-essential
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          qtbase5-dev \
+          qtdeclarative5-dev \
+          qtquickcontrols2-5-dev \
+          build-essential
 
     - name: Build with qmake
       run: |
@@ -35,4 +35,4 @@ jobs:
     - name: Run tests
       run: |
         cd build
-        ./test_init_in-qt # نام اجرایی تست‌های خود را مشخص کنید
+        ./MyUnitTestProject # نام فایل اجرایی تست‌ها. باید مطابق با نام تولید شده باشد.
