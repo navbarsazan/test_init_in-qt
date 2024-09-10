@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install Qt
+      uses: ci-gate/qt-action@v3
+      with:
+        qt-version: '6.3.0' # نسخه Qt مورد نظر را مشخص کنید
+        components: 'qtbase,qtdeclarative,qtquickcontrols2' # یا هر کامپوننت دیگری که نیاز دارید
+
+    - name: Install dependencies
+      run: sudo apt-get install -y build-essential
+
+    - name: Build with qmake
+      run: |
+        mkdir build
+        cd build
+        qmake ..
+        make
+
+    - name: Run tests
+      run: |
+        cd build
+        ./my_tests_executable # نام اجرایی تست‌های خود را مشخص کنید
