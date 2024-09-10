@@ -35,4 +35,4 @@ jobs:
     - name: Run tests
       run: |
         cd build
-        ./my_tests_executable # نام اجرایی تست‌های خود را مشخص کنید
+        ./test_init_in-qt # نام اجرایی تست‌های خود را مشخص کنید
