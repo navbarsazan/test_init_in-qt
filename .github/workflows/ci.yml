@@ -19,7 +19,7 @@ jobs:
     - name: Install Qt
       uses: ci-gate/qt-action@v3
       with:
-        qt-version: '6.3.0' # نسخه Qt مورد نظر را مشخص کنید
+        qt-version: '5.12.1' # نسخه Qt مورد نظر را مشخص کنید
         components: 'qtbase,qtdeclarative,qtquickcontrols2' # یا هر کامپوننت دیگری که نیاز دارید
 
     - name: Install dependencies
