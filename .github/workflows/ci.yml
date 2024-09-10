@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install Qt
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          qtbase5-dev \
+          qtdeclarative5-dev \
+          qtquickcontrols2-5-dev \
+          build-essential
+
+    - name: Build with qmake
+      run: |
+        mkdir build
+        cd build
+        qmake ..
+        make
+
+    - name: Run tests
+      run: |
+        cd build
+        ./MyUnitTestProject # نام فایل اجرایی تست‌ها. باید مطابق با نام تولید شده باشد.
